@@ -1,11 +1,14 @@
 import { FaGithub } from "react-icons/fa";
+import Link from "next/link";
 
 export default function Header() {
   return (
     <header>
       <h1>React Shop</h1>
      <div className="header-link">
-     <span>
+     <Link href={"Checkout"}>
+     <span className="relative">
+      <span className="coun">0</span>
         <svg
           stroke="currentColor"
           fill="currentColor"
@@ -25,6 +28,7 @@ export default function Header() {
           </g>
         </svg>
       </span>
+     </Link>
       <span>
         
         <a href="https://github.com/Siza36/react-shop">
