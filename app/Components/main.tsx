@@ -1,19 +1,27 @@
-"use client";
-
+"use client"
 import React from "react";
 import { CiSearch } from "react-icons/ci";
+import ProductsCard from "./ProductsCard";
 
-export interface Iproductsdata {
-  id: number;
-  nomi: string;
-  narx: number;
-  bis_register: string;
+interface Catagory {
+  id:number;
+  name:string;
+  image:string;
 }
-const BASE_URL = "https://react-shop-backend.liara.run";
+interface Iproductsdata {
+  id?: number;
+  title?: string;
+  price?: number;
+  description?:string;
+  catagory?:Catagory;
+  images?:string[]
+}
 
-export const getProducts: () => Promise<Iproductsdata[]> = async () => {
+
+
+ const getProducts: () => Promise<Iproductsdata[]> = async () => {
   try {
-    const res = await fetch(BASE_URL + "/products?limit=2");
+    const res = await fetch("https://api.escuelajs.co/api/v1/products ");
     if (!res.ok) {
       throw new Error("Mahsulotlarni olib bolmadi");
     }
@@ -26,8 +34,7 @@ export const getProducts: () => Promise<Iproductsdata[]> = async () => {
 
 export default function MainComponents() {
   const products = getProducts();
-  console.log(products);
-
+  
   return (
     <main>
       <div className="Search">
@@ -37,8 +44,10 @@ export default function MainComponents() {
         <input type="search" placeholder="...Qidirmoqda" />
       </div>
       <div className="main-container">
-        <div className="cards">  </div>
-
+        {products.map((product) => (
+          <ProductsCard key={product.id} product={product} />
+        ))}
+        
         <div className="katagoriya">
           <div className="info">
             <h4>Katagoriyalar:</h4>
